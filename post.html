@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-home" href="index.html#top">← Bryce</a>
+  <div class="nav-links">
+    <a href="sound.html">Sound</a>
+    <a class="nav-current" href="words.html">Words</a>
+    <a href="pictures.html">Pictures</a>
+    <a href="the-index.html">The Index</a>
+    <a href="quiet-room.html">The Quiet Room</a>
+  </div>
+</nav>
+
+<section class="post-wrap wrap">
+  <div class="post-head">
+    <div class="kicker" id="post-kicker"></div>
+    <h1 id="post-title">—</h1>
+    <p class="deck" id="post-deck"></p>
+    <div class="date" id="post-date"></div>
+  </div>
+  <article class="post-body" id="post-body"></article>
+</section>
+
+<script src="js/script.js"></script>
+<script>
+  loadFullPost({
+    containerId: 'post-body',
+    kickerId: 'post-kicker',
+    titleId: 'post-title',
+    deckId: 'post-deck',
+    dateId: 'post-date'
+  });
+</script>
+</body>
+</html>

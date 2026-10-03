@@ -40,6 +40,35 @@ async function fetchJSON(path) {
   }
 }
 
+async function fetchText(path) {
+  try {
+    const res = await fetch(path, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('failed to load ' + path);
+    return await res.text();
+  } catch (err) {
+    console.warn(err);
+    return '';
+  }
+}
+
+// Turns a plain-text essay into paragraphs: a blank line starts a new
+// paragraph, *word* becomes italic, **word** becomes bold. Nothing else.
+function mdInline(s) {
+  return s
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+}
+function parseBody(raw) {
+  return raw.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean).map(mdInline);
+}
+function formatDateLong(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
 // ---------- Journal (essays) ----------
 // Renders into any element with the given id. `limit` caps how many
 // show (used for the homepage preview); leave it off for the full list.
@@ -55,7 +84,8 @@ async function loadJournal(containerId, limit) {
   const sorted = entries.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
   const toShow = limit ? sorted.slice(0, limit) : sorted;
   toShow.forEach((entry) => {
-    const a = el('a', { class: 'journal-entry', href: entry.href || '#' });
+    const href = entry.slug ? ('post.html?post=' + encodeURIComponent(entry.slug)) : '#';
+    const a = el('a', { class: 'journal-entry', href: href });
     a.appendChild(text('div', 'date', formatDate(entry.date)));
     a.appendChild(text('div', 't', entry.title || ''));
     a.appendChild(text('div', 'line', entry.summary || ''));
@@ -69,6 +99,87 @@ function formatDate(iso) {
   const parts = iso.split('-');
   if (parts.length !== 3) return iso;
   return parts[1] + '.' + parts[2];
+}
+
+// ---------- Feature excerpt (the spotlighted essay on Home / Words) ----------
+// Shows the first two paragraphs of whichever journal entry is marked
+// "featured": true (or the newest one, if none is marked), with a
+// Continue reading link through to the full piece.
+async function loadFeature(opts) {
+  const kicker = opts.kickerId ? document.getElementById(opts.kickerId) : null;
+  const titleEl = opts.titleId ? document.getElementById(opts.titleId) : null;
+  const deckEl = opts.deckId ? document.getElementById(opts.deckId) : null;
+  const bodyEl = opts.bodyId ? document.getElementById(opts.bodyId) : null;
+  const ctaEl = opts.ctaId ? document.getElementById(opts.ctaId) : null;
+
+  const entries = (await fetchJSON('content/journal.json')) || [];
+  if (!entries.length) return;
+  const sorted = entries.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  const featured = entries.find((e) => e.featured) || sorted[0];
+  if (!featured || !featured.slug) return;
+
+  if (kicker && featured.tag) kicker.textContent = featured.tag;
+  if (titleEl) titleEl.textContent = featured.title || '';
+  if (deckEl) deckEl.textContent = featured.summary || '';
+  if (ctaEl) ctaEl.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+
+  if (bodyEl) {
+    bodyEl.innerHTML = '';
+    const raw = await fetchText('content/posts/' + featured.slug + '.md');
+    const paras = raw ? parseBody(raw) : [];
+    if (!paras.length) {
+      bodyEl.appendChild(text('p', '', '[Write this piece in content/posts/' + featured.slug + '.md]'));
+      return;
+    }
+    paras.slice(0, 2).forEach((p, i) => {
+      const node = document.createElement('p');
+      if (i === 0) node.className = 'dropcap';
+      node.innerHTML = p;
+      bodyEl.appendChild(node);
+    });
+  }
+}
+
+// ---------- Full post page (post.html?post=<slug>) ----------
+async function loadFullPost(opts) {
+  const container = document.getElementById(opts.containerId);
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('post');
+
+  if (!slug) {
+    if (container) container.innerHTML = '<p>No post specified.</p>';
+    return;
+  }
+
+  const entries = (await fetchJSON('content/journal.json')) || [];
+  const entry = entries.find((e) => e.slug === slug);
+
+  if (!entry) {
+    if (container) container.innerHTML = '<p>That post wasn\u2019t found. It may have been renamed or removed.</p>';
+    return;
+  }
+
+  document.title = 'Bryce — ' + entry.title;
+  if (opts.kickerId) document.getElementById(opts.kickerId).textContent = entry.tag || '';
+  if (opts.titleId) document.getElementById(opts.titleId).textContent = entry.title || '';
+  if (opts.deckId) document.getElementById(opts.deckId).textContent = entry.summary || '';
+  if (opts.dateId) document.getElementById(opts.dateId).textContent = formatDateLong(entry.date);
+
+  if (container) {
+    container.innerHTML = '';
+    const raw = await fetchText('content/posts/' + slug + '.md');
+    const paras = raw ? parseBody(raw) : [];
+    if (!paras.length) {
+      container.appendChild(text('p', '', 'Nothing written yet — add the text in content/posts/' + slug + '.md'));
+    } else {
+      paras.forEach((p, i) => {
+        const node = document.createElement('p');
+        if (i === 0) node.className = 'dropcap';
+        node.innerHTML = p;
+        container.appendChild(node);
+      });
+    }
+  }
 }
 
 // ---------- Tracks (songs) ----------

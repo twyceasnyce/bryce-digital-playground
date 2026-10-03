@@ -317,6 +317,16 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .pull-quote { margin-top: 56px; padding: 36px 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-align: center; }
 .pull-quote p { margin: 0; font-family: var(--display); font-style: italic; font-weight: 500; font-variation-settings: 'opsz' 96; font-size: clamp(28px, 5vw, 88px); line-height: 1.05; letter-spacing: -0.025em; color: var(--accent); }
 
+/* ---------- Full post page ---------- */
+.post-wrap { padding: 48px 24px 96px; }
+.post-head { max-width: 680px; }
+.post-head .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.post-head h1 { margin: 14px 0 0; font-family: var(--display); font-weight: 700; font-variation-settings: 'opsz' 96; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.02em; }
+.post-head .deck { margin: 16px 0 0; font-size: 20px; line-height: 1.4; font-style: italic; color: var(--ink-soft); }
+.post-head .date { margin-top: 18px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.post-body { max-width: 680px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--rule); font-size: 18px; line-height: 1.65; }
+.post-body p { margin: 0 0 20px; }
+
 /* ---------- Pictures ---------- */
 .pictures-wrap { background: var(--paper-dark); }
 .mosaic {
