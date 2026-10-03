@@ -57,11 +57,13 @@ Commit it, and the entry is live — it appears in the journal list on
 both the Words page and the homepage, and clicking it shows this full
 text on its own page.
 
-**To feature an entry at the top of the Words page** (the big excerpt,
-instead of just a line in the list), add `"featured": true` to that
-entry in `journal.json`. Only put it on one entry at a time — remove
-it from the old one when you add it to a new one, or the page just
-picks whichever comes first.
+**To change which piece is featured** — the big excerpt on the Words
+page, and the cover story at the top of the homepage, are the *same*
+setting. Move `"featured": true` from one entry in `journal.json` to
+another, and both places update together, including the "Read the
+story" link, which always leads to that entry's own full page. Only
+put `"featured": true` on one entry at a time — if it's on more than
+one, the page just picks whichever comes first in the file.
 
 ## Adding a track (a song)
 
@@ -88,6 +90,35 @@ If you leave `"image": ""` it shows as a plain colored tile (a
 placeholder). Once you have a real photo: upload the image file into
 the `images/` folder, then put its file name in the `image` field,
 like `"image": "images/my-photo.jpg"`.
+
+## Changing the ticker at the top
+
+The scrolling line at the very top of the homepage (Now reading / Now
+writing / Now inked / Now listening) only exists on `index.html` — it
+doesn't appear on the other pages. Open `index.html` in GitHub and
+find this block, near the very top of the file:
+
+```html
+<div class="ticker-track" id="ticker-track">
+  <span>Now reading: Guards! Guards! by Terry Pratchett</span>
+  <span>Now writing: I'm figuring that out, don't worry about it</span>
+  <span>Now inked: Caran d'Ache 849 Ballpoint</span>
+  <span>Now listening: [album]</span>
+  <span>No editors. No rules. No paid promotion.</span>
+  <span>Now reading: Guards! Guards! by Terry Pratchett</span>
+  <span>Now writing: I'm figuring that out, don't worry about it</span>
+  <span>Now inked: Caran d'Ache 849 Ballpoint</span>
+  <span>Now listening: [album]</span>
+  <span>No editors. No rules. No paid promotion.</span>
+</div>
+```
+
+**The one thing to know:** those five lines appear twice in a row,
+back to back. That's not a mistake — it's what makes the scroll loop
+seamlessly instead of jumping when it restarts. When you change a
+line, change *both* copies of it (the matching line in the first five
+and the second five) to the same new text, or the ticker will
+visibly flicker to different text each time it loops.
 
 ## A couple of things worth knowing
 

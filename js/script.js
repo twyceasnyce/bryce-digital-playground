@@ -123,6 +123,16 @@ async function loadFeature(opts) {
   if (deckEl) deckEl.textContent = featured.summary || '';
   if (ctaEl) ctaEl.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
 
+  // Optional: the homepage cover story uses the same featured entry.
+  const coverKicker = opts.coverKickerId ? document.getElementById(opts.coverKickerId) : null;
+  const coverTitle = opts.coverTitleId ? document.getElementById(opts.coverTitleId) : null;
+  const coverDeck = opts.coverDeckId ? document.getElementById(opts.coverDeckId) : null;
+  const coverCta = opts.coverCtaId ? document.getElementById(opts.coverCtaId) : null;
+  if (coverKicker && featured.tag) coverKicker.textContent = featured.tag;
+  if (coverTitle) coverTitle.textContent = featured.title || '';
+  if (coverDeck) coverDeck.textContent = featured.summary || '';
+  if (coverCta) coverCta.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+
   if (bodyEl) {
     bodyEl.innerHTML = '';
     const raw = await fetchText('content/posts/' + featured.slug + '.md');

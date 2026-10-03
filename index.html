@@ -50,14 +50,14 @@
 
 <section class="cover wrap">
   <div class="cover-text">
-    <div class="cover-kicker">Cover story &nbsp;/&nbsp; Creative nonfiction</div>
-    <h2>The Introvert’s Guide to Making Loud Things</h2>
-    <p class="cover-deck">Ten thousand words on ink, silence, and what happens when a person who hates small talk builds an entire magazine just to hear himself think.</p>
+    <div class="cover-kicker">Cover story &nbsp;/&nbsp; <span id="cover-kicker">—</span></div>
+    <h2 id="cover-title">—</h2>
+    <p class="cover-deck" id="cover-deck"></p>
     <div class="cover-meta">
       <span>Words, photographs &amp; music by Bryce</span>
       <span class="muted">[X] min read</span>
     </div>
-    <a class="cover-cta lnk" href="words.html">Read the story
+    <a class="cover-cta lnk" id="cover-cta" href="#">Read the story
       <svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="#15130F" stroke-width="1.6"><path d="M0 7h26M20 1l6 6-6 6"/></svg>
     </a>
   </div>
@@ -261,7 +261,11 @@
     titleId: 'feature-title',
     deckId: 'feature-deck',
     bodyId: 'feature-body',
-    ctaId: 'feature-cta'
+    ctaId: 'feature-cta',
+    coverKickerId: 'cover-kicker',
+    coverTitleId: 'cover-title',
+    coverDeckId: 'cover-deck',
+    coverCtaId: 'cover-cta'
   });
   loadSound({
     playerTitleId: 'home-player-title',

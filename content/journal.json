@@ -1,11 +1,18 @@
 [
   {
+    "date": "2026-09-21",
+    "title": "The Introvert's Guide to Making Loud Things",
+    "summary": "Ten thousand words on ink, silence, and what happens when a person who hates small talk builds an entire magazine just to hear himself think.",
+    "tag": "Creative nonfiction",
+    "slug": "the-introverts-guide-to-making-loud-things",
+    "featured": true
+  },
+  {
     "date": "2026-09-14",
     "title": "What My Notebook Knows That I Don't",
     "summary": "A meditation on ink, avoidance, and the eleven drafts of a single paragraph.",
     "tag": "Pens & paper",
-    "slug": "what-my-notebook-knows",
-    "featured": true
+    "slug": "what-my-notebook-knows"
   },
   {
     "date": "2026-09-02",
