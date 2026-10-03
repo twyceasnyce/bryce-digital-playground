@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryce — Pictures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pictures-wrap">
+
+<nav class="nav">
+  <a class="nav-home" href="index.html#top">← Bryce</a>
+  <div class="nav-links">
+    <a href="sound.html">Sound</a>
+    <a href="words.html">Words</a>
+    <a class="nav-current" href="pictures.html">Pictures</a>
+    <a href="the-index.html">The Index</a>
+    <a href="quiet-room.html">The Quiet Room</a>
+  </div>
+</nav>
+
+<header class="dept-hero wrap">
+  <div class="dept-eyebrow" style="color:#5A5447">03 &nbsp;/&nbsp; Department</div>
+  <h1>Pictures</h1>
+  <p>Photographs, with captions that try slightly too hard.</p>
+</header>
+
+<section class="mosaic wrap" style="margin-top:16px;">
+  <figure style="grid-column:1/6;grid-row:span 5;background:#3B342B;">
+    <figcaption class="on-dark"><span class="pl">PL. 01</span><div class="cap">Morning light, [location].</div></figcaption>
+  </figure>
+  <figure style="grid-column:6/10;grid-row:span 2;background:#8A8676;">
+    <figcaption class="on-light"><span class="pl">PL. 02</span><div class="cap">Desk, 6:12 a.m.</div></figcaption>
+  </figure>
+  <figure style="grid-column:10/13;grid-row:span 3;background:#2A2F3A;">
+    <figcaption class="on-dark"><span class="pl">PL. 03</span><div class="cap">[Subject], mid-motion.</div></figcaption>
+  </figure>
+  <figure style="grid-column:6/10;grid-row:span 3;background:#CDB98E;">
+    <figcaption class="on-light"><span class="pl">PL. 04</span><div class="cap">Piano, unattended.</div></figcaption>
+  </figure>
+  <figure style="grid-column:10/13;grid-row:span 2;background:#B02A14;">
+    <figcaption class="on-dark"><span class="pl">PL. 05</span><div class="cap">Fog. Nobody’s fault.</div></figcaption>
+  </figure>
+  <figure style="grid-column:1/6;grid-row:span 2;background:#6B5B47;">
+    <figcaption class="on-dark"><span class="pl">PL. 06</span><div class="cap">[Caption.]</div></figcaption>
+  </figure>
+  <figure style="grid-column:6/13;grid-row:span 2;background:#4A4F42;">
+    <figcaption class="on-dark"><span class="pl">PL. 07</span><div class="cap">[Caption.]</div></figcaption>
+  </figure>
+</section>
+
+<section class="contact-sheet wrap">
+  <div class="frame">
+    <div class="sprocket"></div>
+    <div class="contact-strip" id="photo-strip"></div>
+    <div class="sprocket"></div>
+  </div>
+  <div class="contact-foot">Contact sheet — edit <code>content/photos.json</code> to add frames</div>
+</section>
+
+<script src="js/script.js"></script>
+<script>
+  loadPhotoStrip('photo-strip');
+</script>
+</body>
+</html>

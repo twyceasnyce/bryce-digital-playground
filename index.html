@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryce</title>
+<meta name="description" content="A one-person magazine. Music, writing, photographs, and the things I keep circling back to.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track">
+    <!-- duplicated once in JS-free CSS marquee: two copies so the loop is seamless -->
+    <span>Now reading: Guards! Guards! by Terry Pratchett</span>
+    <span>Now writing: I’m figuring that out, don’t worry about it</span>
+    <span>Now inked: Caran d’Ache 849 Ballpoint</span>
+    <span>Now listening: [album]</span>
+    <span>No editors. No rules. No paid promotion.</span>
+    <span>Now reading: Guards! Guards! by Terry Pratchett</span>
+    <span>Now writing: I’m figuring that out, don’t worry about it</span>
+    <span>Now inked: Caran d’Ache 849 Ballpoint</span>
+    <span>Now listening: [album]</span>
+    <span>No editors. No rules. No paid promotion.</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-links">
+    <a href="sound.html">Sound</a>
+    <a href="words.html">Words</a>
+    <a href="pictures.html">Pictures</a>
+    <a href="the-index.html">The Index</a>
+    <a href="quiet-room.html">The Quiet Room</a>
+  </div>
+  <a class="nav-subscribe" href="#subscribe">Subscribe (it’s just me)</a>
+</nav>
+
+<header class="masthead" id="top">
+  <h1>Bryce</h1>
+  <div class="masthead-badge">No editors<br>No rules<br>No notes</div>
+  <div class="masthead-bar">
+    <span>Music &nbsp;·&nbsp; Essays &nbsp;·&nbsp; Photographs &nbsp;·&nbsp; Family life</span>
+    <span>A one-person magazine, updated when something’s ready</span>
+  </div>
+</header>
+
+<section class="cover wrap">
+  <div class="cover-text">
+    <div class="cover-kicker">Cover story &nbsp;/&nbsp; Creative nonfiction</div>
+    <h2>The Introvert’s Guide to Making Loud Things</h2>
+    <p class="cover-deck">Ten thousand words on ink, silence, and what happens when a person who hates small talk builds an entire magazine just to hear himself think.</p>
+    <div class="cover-meta">
+      <span>Words, photographs &amp; music by Bryce</span>
+      <span class="muted">[X] min read</span>
+    </div>
+    <a class="cover-cta lnk" href="words.html">Read the story
+      <svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="#15130F" stroke-width="1.6"><path d="M0 7h26M20 1l6 6-6 6"/></svg>
+    </a>
+  </div>
+  <div class="cover-art">
+    <img class="cover-photo" src="images/bryce-cover.jpg" alt="Bryce, cover photograph">
+    <div class="cover-sticker">
+      <div class="label">Also inside</div>
+      <div class="title">The pen I can’t stop buying</div>
+    </div>
+    <div class="cover-caption">Photograph: Bryce. California, Summer 2026.</div>
+  </div>
+</section>
+
+<section class="contents wrap">
+  <div class="contents-head">
+    <span>What’s here</span><span class="muted">Five departments, zero deadlines</span>
+  </div>
+  <div class="contents-grid">
+    <a class="contents-item" href="sound.html"><div class="n">01</div><div class="t">Sound</div><p>Recordings, sketches, and things left unfinished on purpose.</p></a>
+    <a class="contents-item" href="words.html"><div class="n">02</div><div class="t">Words</div><p>Scholarship, essays, and a journal with no editorial calendar.</p></a>
+    <a class="contents-item" href="pictures.html"><div class="n">03</div><div class="t">Pictures</div><p>Photographs, with captions that try too hard.</p></a>
+    <a class="contents-item" href="the-index.html"><div class="n">04</div><div class="t">The Index</div><p>Recurring themes — books, parenting, marriage, the introvert life.</p></a>
+    <a class="contents-item" href="quiet-room.html"><div class="n">05</div><div class="t">The Quiet Room</div><p>A short manifesto for people who’d rather make something.</p></a>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="sound-section wrap">
+    <div class="sound-main">
+      <div class="dept-eyebrow" style="color:var(--dark-mute)">01 &nbsp;/&nbsp; Sound</div>
+      <a class="section-link" href="sound.html">
+        <h2 style="margin:8px 0 0 -4px;font-family:var(--display);font-style:italic;font-weight:500;font-variation-settings:'opsz' 96;font-size:clamp(56px,14vw,230px);line-height:0.9;letter-spacing:-0.04em;">Sound</h2>
+      </a>
+
+      <div class="player">
+        <button class="player-btn" id="home-player-btn" aria-label="Play or pause" type="button">
+          <svg width="22" height="22" viewBox="0 0 26 26" fill="#15130F"><path d="M7 3v20l17-10z"/></svg>
+        </button>
+        <div class="player-info">
+          <div class="player-row">
+            <div class="player-title" id="home-player-title">—</div>
+            <div class="player-tag" id="home-player-tag">—</div>
+          </div>
+          <div class="player-bars" id="home-player-bars"></div>
+        </div>
+      </div>
+      <div class="player-note">Mock-up: no audio yet. Pick a track to see the state change.</div>
+    </div>
+
+    <div class="sound-side">
+      <div class="track-list-head"><span>The listening room</span><span>Sketches &amp; finished things</span></div>
+      <div id="home-track-list"></div>
+      <div class="track-foot"><a class="lnk" href="sound.html" style="font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;">All recordings →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="words-grid wrap">
+  <div class="words-cols">
+    <article class="feature">
+      <div class="feature-kicker">Creative nonfiction</div>
+      <a class="section-link" href="words.html"><h2>What My Notebook Knows That I Don’t</h2></a>
+      <p class="deck">A meditation on ink, avoidance, and the eleven drafts of a single paragraph.</p>
+      <div class="feature-body">
+        <p class="dropcap">There is a particular kind of silence that only happens at a desk at five in the morning, when the house is asleep and the only sound is a nib dragging across paper. I used to think that silence was empty. It turns out it was full of sentences waiting for me to stop talking.</p>
+        <p>This is the essay where I try to explain why I keep a notebook I never reread, why the good pen matters more than it should, and what a quiet person is actually doing when he says he is just thinking.</p>
+        <p>[The rest of the piece continues here.]</p>
+      </div>
+      <a class="lnk" href="words.html" style="display:inline-block;margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;">Continue reading →</a>
+    </article>
+
+    <aside class="academic">
+      <div class="academic-head"><span class="cat">Academic</span><span class="meta">Working paper</span></div>
+      <h3>[Working Title]: An Argument in Three Movements</h3>
+      <div class="lbl">Abstract</div>
+      <p>[Two or three sentences summarizing the argument. Written for scholars, readable by everyone else.]</p>
+      <div class="chips"><span>PDF</span><span>Cite</span><span>Forthcoming</span></div>
+      <div class="academic-also">
+        <div class="lbl">Also</div>
+        <div style="margin-top:8px;font-family:var(--display);font-size:20px;line-height:1.15;font-style:italic;">[Conference talk or article title]</div>
+      </div>
+    </aside>
+
+    <div class="journal">
+      <div class="journal-head">The journal</div>
+      <div id="home-journal-list"></div>
+      <div style="margin-top:16px;"><a class="lnk" href="words.html" style="font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;">Read the journal →</a></div>
+    </div>
+  </div>
+
+  <div class="pull-quote"><p>“The good sentences show up when I stop performing.”</p></div>
+</section>
+
+<section class="pictures-wrap">
+  <div class="dept-hero wrap" style="padding-bottom:0;">
+    <div class="dept-eyebrow">03 &nbsp;/&nbsp; Pictures</div>
+    <a class="section-link" href="pictures.html"><h1 style="font-size:clamp(48px,10vw,150px);">Pictures</h1></a>
+  </div>
+  <div class="mosaic wrap">
+    <figure style="grid-column:1/6;grid-row:span 4;background:#3B342B;">
+      <figcaption class="on-dark"><span class="pl">PL. 01</span><div class="cap">Morning light, [location].</div></figcaption>
+    </figure>
+    <figure style="grid-column:6/10;grid-row:span 2;background:#8A8676;">
+      <figcaption class="on-light"><span class="pl">PL. 02</span><div class="cap">Desk, 6:12 a.m.</div></figcaption>
+    </figure>
+    <figure style="grid-column:10/13;grid-row:span 3;background:#2A2F3A;">
+      <figcaption class="on-dark"><span class="pl">PL. 03</span><div class="cap">[Subject], mid-motion.</div></figcaption>
+    </figure>
+    <figure style="grid-column:6/10;grid-row:span 2;background:#CDB98E;">
+      <figcaption class="on-light"><span class="pl">PL. 04</span><div class="cap">Piano, unattended.</div></figcaption>
+    </figure>
+  </div>
+  <div class="wrap" style="padding:24px 24px 56px;text-align:right;">
+    <a class="lnk" href="pictures.html" style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">Browse all photographs →</a>
+  </div>
+</section>
+
+<section class="wrap" style="padding:56px 24px 0;">
+  <div class="dept-eyebrow">04 &nbsp;/&nbsp; The Index</div>
+  <a class="section-link" href="the-index.html"><h2 style="margin:8px 0 0 -4px;font-family:var(--display);font-style:italic;font-weight:500;font-variation-settings:'opsz' 96;font-size:clamp(40px,10vw,150px);line-height:0.95;letter-spacing:-0.035em;">The Index</h2></a>
+</section>
+
+<section class="index-rows wrap">
+  <div class="list">
+    <a class="index-row" href="the-index.html">
+      <span class="n">01</span><span class="name">Books</span><span class="line">Reading notes &amp; reluctant recommendations</span>
+      <svg class="arrow" width="36" height="16" viewBox="0 0 40 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 9h37M29 1l8 8-8 8"/></svg>
+    </a>
+    <a class="index-row" href="the-index.html">
+      <span class="n">02</span><span class="name">Parenting</span><span class="line">Dispatches from a house that is never quiet</span>
+      <svg class="arrow" width="36" height="16" viewBox="0 0 40 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 9h37M29 1l8 8-8 8"/></svg>
+    </a>
+    <a class="index-row" href="the-index.html">
+      <span class="n">03</span><span class="name">Marriage</span><span class="line">The long collaboration</span>
+      <svg class="arrow" width="36" height="16" viewBox="0 0 40 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 9h37M29 1l8 8-8 8"/></svg>
+    </a>
+    <a class="index-row" href="the-index.html">
+      <span class="n">04</span><span class="name">The Introvert’s Life</span><span class="line">Making cool stuff, avoiding meetings</span>
+      <svg class="arrow" width="36" height="16" viewBox="0 0 40 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 9h37M29 1l8 8-8 8"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="desk-reports wrap">
+  <div class="desk-card red">
+    <div class="lbl">Desk report &nbsp;/&nbsp; Currently inked</div>
+    <div class="big">Caran d’Ache 849</div>
+    <p>Ballpoint. No fountain-pen ritual required — just reliable, every time.</p>
+  </div>
+  <div class="desk-card dark">
+    <div class="lbl" style="color:var(--dark-mute)">Reading list &nbsp;/&nbsp; Currently reading</div>
+    <div class="big">Guards! Guards!</div>
+    <p>By Terry Pratchett. [Page / thoughts so far.]</p>
+  </div>
+</section>
+
+<section class="quiet-wrap">
+  <div class="quiet-hero wrap">
+    <div class="quiet-text">
+      <div class="dept-eyebrow" style="color:var(--dark-text)">05 &nbsp;/&nbsp; The Quiet Room</div>
+      <a class="section-link" href="quiet-room.html"><h1>Please don’t make me network.</h1></a>
+      <p class="lede">A short manifesto for an introvert who just wants to make cool stuff, and the small daily negotiations it takes to get there.</p>
+      <a class="lnk" href="quiet-room.html" style="display:inline-flex;align-items:center;min-height:44px;margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;border-bottom:2px solid var(--dark-text);">Enter the quiet room →</a>
+    </div>
+    <div class="battery-card">
+      <div class="lbl">Social battery</div>
+      <div class="battery-pct" id="home-battery-pct">100%</div>
+      <div class="battery-segments" id="home-battery-segments"></div>
+      <div class="battery-msg" id="home-battery-msg"></div>
+      <div class="battery-buttons">
+        <button type="button" id="home-battery-party">Attend a party (−30)</button>
+        <button type="button" class="fill" id="home-battery-home">Go home &amp; make something (+50)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="subscribe wrap" id="subscribe">
+  <div class="subscribe-grid">
+    <div class="subscribe-text">
+      <div class="kicker">Subscribe</div>
+      <h2>Get new posts when they happen. It’s just me, so it might be a while.</h2>
+    </div>
+    <div class="subscribe-form">
+      <label for="email">Your email</label>
+      <input id="email" type="email" placeholder="you@somewhere.quiet">
+      <button type="button">Subscribe</button>
+      <div class="subscribe-note">Mock-up: this form isn’t wired to anything yet.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer wrap">
+  <span>© 2026 Bryce</span>
+  <span>Set in Bodoni Moda, Newsreader &amp; DM Mono.</span>
+  <span>Music &nbsp;·&nbsp; Words &nbsp;·&nbsp; Pictures</span>
+</footer>
+<div class="wordmark-strip"><div>Bryce</div></div>
+
+<script src="js/script.js"></script>
+<script>
+  loadJournal('home-journal-list', 4);
+  loadSound({
+    playerTitleId: 'home-player-title',
+    playerTagId: 'home-player-tag',
+    playerBtnId: 'home-player-btn',
+    playerBarsId: 'home-player-bars',
+    listId: 'home-track-list'
+  });
+  initBattery({
+    pctId: 'home-battery-pct',
+    segmentsId: 'home-battery-segments',
+    msgId: 'home-battery-msg',
+    partyBtnId: 'home-battery-party',
+    homeBtnId: 'home-battery-home'
+  });
+</script>
+</body>
+</html>

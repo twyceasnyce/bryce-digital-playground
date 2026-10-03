@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryce — Words</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-home" href="index.html#top">← Bryce</a>
+  <div class="nav-links">
+    <a href="sound.html">Sound</a>
+    <a class="nav-current" href="words.html">Words</a>
+    <a href="pictures.html">Pictures</a>
+    <a href="the-index.html">The Index</a>
+    <a href="quiet-room.html">The Quiet Room</a>
+  </div>
+</nav>
+
+<header class="dept-hero wrap">
+  <div class="dept-eyebrow">02 &nbsp;/&nbsp; Department</div>
+  <h1>Words</h1>
+  <p>Three desks under one roof: scholarship, essays, and a journal with no editorial calendar.</p>
+</header>
+
+<section class="words-grid wrap">
+  <div class="words-cols">
+    <article class="feature">
+      <div class="feature-kicker">Creative nonfiction</div>
+      <h2>What My Notebook Knows That I Don’t</h2>
+      <p class="deck">A meditation on ink, avoidance, and the eleven drafts of a single paragraph.</p>
+      <div class="feature-body">
+        <p class="dropcap">There is a particular kind of silence that only happens at a desk at five in the morning, when the house is asleep and the only sound is a nib dragging across paper. I used to think that silence was empty. It turns out it was full of sentences waiting for me to stop talking.</p>
+        <p>This is the essay where I try to explain why I keep a notebook I never reread, why the good pen matters more than it should, and what a quiet person is actually doing when he says he is just thinking.</p>
+        <p>[The rest of the piece continues here.]</p>
+      </div>
+    </article>
+
+    <aside class="academic">
+      <div class="academic-head"><span class="cat">Academic</span><span class="meta">Working paper</span></div>
+      <h3>[Working Title]: An Argument in Three Movements</h3>
+      <div class="lbl">Abstract</div>
+      <p>[Two or three sentences summarizing the argument. Written for scholars, readable by everyone else.]</p>
+      <div class="chips"><span>PDF</span><span>Cite</span><span>Forthcoming</span></div>
+      <div class="academic-also">
+        <div class="lbl">Also</div>
+        <div style="margin-top:8px;font-family:var(--display);font-size:20px;line-height:1.15;font-style:italic;">[Conference talk or article title]</div>
+      </div>
+    </aside>
+
+    <div class="journal">
+      <div class="journal-head">The journal</div>
+      <div id="journal-list"></div>
+    </div>
+  </div>
+
+  <div class="pull-quote"><p>“The good sentences show up when I stop performing.”</p></div>
+</section>
+
+<script src="js/script.js"></script>
+<script>
+  loadJournal('journal-list');
+</script>
+</body>
+</html>

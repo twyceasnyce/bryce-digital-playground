@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryce — The Quiet Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="quiet-wrap">
+
+<nav class="nav nav--dark">
+  <a class="nav-home" href="index.html#top">← Bryce</a>
+  <div class="nav-links">
+    <a href="sound.html">Sound</a>
+    <a href="words.html">Words</a>
+    <a href="pictures.html">Pictures</a>
+    <a href="the-index.html">The Index</a>
+    <a class="nav-current" href="quiet-room.html">The Quiet Room</a>
+  </div>
+</nav>
+
+<section class="quiet-hero wrap">
+  <div class="quiet-text">
+    <div class="dept-eyebrow" style="color:var(--dark-text)">05 &nbsp;/&nbsp; A standing manifesto</div>
+    <h1>Please don’t make me network.</h1>
+    <p class="lede">A short manifesto for an introvert who just wants to make cool stuff, and the small daily negotiations it takes to get there.</p>
+    <div class="manifesto">
+      <p>[A paragraph or two here — the actual case for being a quiet person who still manages to build things. Why rooms full of strangers drain you and a closed door with a piano on the other side doesn't. This page doesn't update on a schedule; it just says the thing once, plainly, and stays.]</p>
+      <p>[If it ever needs revising, it gets revised — but there's no expectation of a new entry here every week. That's what the Journal is for.]</p>
+    </div>
+  </div>
+  <div class="battery-card">
+    <div class="lbl">Social battery</div>
+    <div class="battery-pct" id="battery-pct">100%</div>
+    <div class="battery-segments" id="battery-segments"></div>
+    <div class="battery-msg" id="battery-msg"></div>
+    <div class="battery-buttons">
+      <button type="button" id="battery-party">Attend a party (−30)</button>
+      <button type="button" class="fill" id="battery-home">Go home &amp; make something (+50)</button>
+    </div>
+  </div>
+</section>
+
+<script src="js/script.js"></script>
+<script>
+  initBattery({
+    pctId: 'battery-pct',
+    segmentsId: 'battery-segments',
+    msgId: 'battery-msg',
+    partyBtnId: 'battery-party',
+    homeBtnId: 'battery-home'
+  });
+</script>
+</body>
+</html>
