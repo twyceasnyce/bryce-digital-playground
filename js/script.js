@@ -29,6 +29,16 @@ function text(tag, cls, str) {
   return node;
 }
 
+// Points a heading at a URL: reuses the link it already sits in,
+// otherwise wraps it in a new one.
+function linkHeading(heading, href) {
+  const existing = heading.closest('a');
+  if (existing) { existing.setAttribute('href', href); return; }
+  const a = el('a', { class: 'section-link', href: href });
+  heading.parentNode.insertBefore(a, heading);
+  a.appendChild(heading);
+}
+
 async function fetchJSON(path) {
   try {
     const res = await fetch(path, { cache: 'no-cache' });
@@ -119,9 +129,10 @@ async function loadFeature(opts) {
   if (!featured || !featured.slug) return;
 
   if (kicker && featured.tag) kicker.textContent = featured.tag;
-  if (titleEl) titleEl.textContent = featured.title || '';
+  const postHref = 'post.html?post=' + encodeURIComponent(featured.slug);
+  if (titleEl) { titleEl.textContent = featured.title || ''; linkHeading(titleEl, postHref); }
   if (deckEl) deckEl.textContent = featured.summary || '';
-  if (ctaEl) ctaEl.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+  if (ctaEl) ctaEl.setAttribute('href', postHref);
 
   // Optional: the homepage cover story uses the same featured entry.
   const coverKicker = opts.coverKickerId ? document.getElementById(opts.coverKickerId) : null;
@@ -129,9 +140,9 @@ async function loadFeature(opts) {
   const coverDeck = opts.coverDeckId ? document.getElementById(opts.coverDeckId) : null;
   const coverCta = opts.coverCtaId ? document.getElementById(opts.coverCtaId) : null;
   if (coverKicker && featured.tag) coverKicker.textContent = featured.tag;
-  if (coverTitle) coverTitle.textContent = featured.title || '';
+  if (coverTitle) { coverTitle.textContent = featured.title || ''; linkHeading(coverTitle, postHref); }
   if (coverDeck) coverDeck.textContent = featured.summary || '';
-  if (coverCta) coverCta.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+  if (coverCta) coverCta.setAttribute('href', postHref);
 
   if (bodyEl) {
     bodyEl.innerHTML = '';
