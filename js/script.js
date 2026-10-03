@@ -29,6 +29,37 @@ function text(tag, cls, str) {
   return node;
 }
 
+// Points a heading at a URL: reuses the link it already sits in,
+// otherwise wraps it in a new one.
+function linkHeading(heading, href) {
+  const existing = heading.closest('a');
+  if (existing) { existing.setAttribute('href', href); return; }
+  const a = el('a', { class: 'section-link', href: href });
+  heading.parentNode.insertBefore(a, heading);
+  a.appendChild(heading);
+}
+
+// Makes the first letter of a paragraph a big red drop cap. Only the
+// letter itself is enlarged: anything in front of it (a bracket, a
+// quotation mark) stays at normal size, tucked in beside the letter.
+function addDropcap(paragraph) {
+  const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const m = node.nodeValue.match(/^(\s*)([^\p{L}\p{N}]*?)([\p{L}\p{N}])/u);
+    if (!m) {
+      if (node.nodeValue.trim()) return; // text with no letters at all: leave it alone
+      continue;
+    }
+    const cap = el('span', { class: 'dropcap' });
+    if (m[2]) cap.appendChild(text('span', 'dropcap-lead', m[2]));
+    cap.appendChild(document.createTextNode(m[3]));
+    node.nodeValue = node.nodeValue.slice(m[0].length);
+    node.parentNode.insertBefore(cap, node);
+    return;
+  }
+}
+
 async function fetchJSON(path) {
   try {
     const res = await fetch(path, { cache: 'no-cache' });
@@ -119,9 +150,10 @@ async function loadFeature(opts) {
   if (!featured || !featured.slug) return;
 
   if (kicker && featured.tag) kicker.textContent = featured.tag;
-  if (titleEl) titleEl.textContent = featured.title || '';
+  const postHref = 'post.html?post=' + encodeURIComponent(featured.slug);
+  if (titleEl) { titleEl.textContent = featured.title || ''; linkHeading(titleEl, postHref); }
   if (deckEl) deckEl.textContent = featured.summary || '';
-  if (ctaEl) ctaEl.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+  if (ctaEl) ctaEl.setAttribute('href', postHref);
 
   // Optional: the homepage cover story uses the same featured entry.
   const coverKicker = opts.coverKickerId ? document.getElementById(opts.coverKickerId) : null;
@@ -129,9 +161,9 @@ async function loadFeature(opts) {
   const coverDeck = opts.coverDeckId ? document.getElementById(opts.coverDeckId) : null;
   const coverCta = opts.coverCtaId ? document.getElementById(opts.coverCtaId) : null;
   if (coverKicker && featured.tag) coverKicker.textContent = featured.tag;
-  if (coverTitle) coverTitle.textContent = featured.title || '';
+  if (coverTitle) { coverTitle.textContent = featured.title || ''; linkHeading(coverTitle, postHref); }
   if (coverDeck) coverDeck.textContent = featured.summary || '';
-  if (coverCta) coverCta.setAttribute('href', 'post.html?post=' + encodeURIComponent(featured.slug));
+  if (coverCta) coverCta.setAttribute('href', postHref);
 
   if (bodyEl) {
     bodyEl.innerHTML = '';
@@ -143,8 +175,8 @@ async function loadFeature(opts) {
     }
     paras.slice(0, 2).forEach((p, i) => {
       const node = document.createElement('p');
-      if (i === 0) node.className = 'dropcap';
       node.innerHTML = p;
+      if (i === 0) addDropcap(node);
       bodyEl.appendChild(node);
     });
   }
@@ -184,8 +216,8 @@ async function loadFullPost(opts) {
     } else {
       paras.forEach((p, i) => {
         const node = document.createElement('p');
-        if (i === 0) node.className = 'dropcap';
         node.innerHTML = p;
+        if (i === 0) addDropcap(node);
         container.appendChild(node);
       });
     }
