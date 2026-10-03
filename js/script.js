@@ -39,6 +39,27 @@ function linkHeading(heading, href) {
   a.appendChild(heading);
 }
 
+// Makes the first letter of a paragraph a big red drop cap. Only the
+// letter itself is enlarged: anything in front of it (a bracket, a
+// quotation mark) stays at normal size, tucked in beside the letter.
+function addDropcap(paragraph) {
+  const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const m = node.nodeValue.match(/^(\s*)([^\p{L}\p{N}]*?)([\p{L}\p{N}])/u);
+    if (!m) {
+      if (node.nodeValue.trim()) return; // text with no letters at all: leave it alone
+      continue;
+    }
+    const cap = el('span', { class: 'dropcap' });
+    if (m[2]) cap.appendChild(text('span', 'dropcap-lead', m[2]));
+    cap.appendChild(document.createTextNode(m[3]));
+    node.nodeValue = node.nodeValue.slice(m[0].length);
+    node.parentNode.insertBefore(cap, node);
+    return;
+  }
+}
+
 async function fetchJSON(path) {
   try {
     const res = await fetch(path, { cache: 'no-cache' });
@@ -154,8 +175,8 @@ async function loadFeature(opts) {
     }
     paras.slice(0, 2).forEach((p, i) => {
       const node = document.createElement('p');
-      if (i === 0) node.className = 'dropcap';
       node.innerHTML = p;
+      if (i === 0) addDropcap(node);
       bodyEl.appendChild(node);
     });
   }
@@ -195,8 +216,8 @@ async function loadFullPost(opts) {
     } else {
       paras.forEach((p, i) => {
         const node = document.createElement('p');
-        if (i === 0) node.className = 'dropcap';
         node.innerHTML = p;
+        if (i === 0) addDropcap(node);
         container.appendChild(node);
       });
     }
